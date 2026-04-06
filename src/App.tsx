@@ -3,6 +3,7 @@ import { Sidebar } from "./components/Sidebar";
 import { PlaceholderPage } from "./pages/PlaceholderPage";
 import { Shipments } from "./pages/Shipments";
 import { ShipmentDetail } from "./pages/ShipmentDetail";
+import { Settings } from "./pages/Settings";
 
 function Layout() {
   return (
@@ -19,7 +20,7 @@ function Layout() {
           <Route path="/analytics" element={<PlaceholderPage title="Analytics" description="Insights and performance metrics for your operations." />} />
           <Route path="/claims" element={<PlaceholderPage title="Claims" description="File and manage shipping claims." />} />
           <Route path="/billing" element={<PlaceholderPage title="Billing" description="Invoices, payment history, and plan details." />} />
-          <Route path="/settings" element={<PlaceholderPage title="Settings" description="Manage your account and workspace preferences." />} />
+          <Route path="/settings" element={<Settings />} />
           <Route path="/support" element={<PlaceholderPage title="Support" description="Get help from the Parsel support team." />} />
           <Route path="/feedback" element={<PlaceholderPage title="Feedback" description="Share your thoughts to help us improve." />} />
         </Routes>
