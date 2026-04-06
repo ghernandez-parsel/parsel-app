@@ -1,0 +1,391 @@
+export type ShipmentStatus =
+  | "Label Created"
+  | "Pickup Assigned"
+  | "Picked Up"
+  | "In Transit"
+  | "Out for Delivery"
+  | "Delivered"
+  | "Cancelled"
+  | "Return to Sender"
+  | "Damaged";
+
+export interface TrackingEvent {
+  label: string;
+  description?: string;
+  timestamp?: string;
+  hasMoreLink?: boolean;
+}
+
+export interface OrderItem {
+  name: string;
+  weight: string;
+  units: string;
+}
+
+export interface Shipment {
+  id: string;
+  trackingNumber: string;
+  serviceLevel: string;
+  carrier: string;
+  order: string;
+  status: ShipmentStatus;
+  labelCreated: string;
+  destination: string;
+  // Detail page fields
+  price: string;
+  carrierFull: string;
+  weight: string;
+  dimensions: string;
+  recipientName: string;
+  address: string;
+  city: string;
+  phone: string;
+  created: string;
+  statusHeadline: string;
+  trackingHistory: TrackingEvent[];
+  orderItems: OrderItem[];
+}
+
+const FOUR_ITEMS: OrderItem[] = [
+  { name: "Product Name", weight: "0.50 lbs", units: "1 Unit" },
+  { name: "Product Name", weight: "0.50 lbs", units: "1 Unit" },
+  { name: "Product Name", weight: "0.50 lbs", units: "1 Unit" },
+  { name: "Product Name", weight: "0.50 lbs", units: "1 Unit" },
+];
+
+export const SHIPMENTS: Shipment[] = [
+  {
+    id: "1",
+    trackingNumber: "UUS5A62471982914608",
+    serviceLevel: "Standard",
+    carrier: "UPS",
+    order: "#1161",
+    status: "Label Created",
+    labelCreated: "March 4 at 2:49pm",
+    destination: "New York, NY",
+    price: "$8.44",
+    carrierFull: "UniUni Standard",
+    weight: "2.00 lbs",
+    dimensions: "11.00w x 14.00l x 4.00h in",
+    recipientName: "Bay Area Sam",
+    address: "939 La Mesa Ter",
+    city: "Sunnyvale, CA 94086-1707",
+    phone: "(732) 673-9846",
+    created: "March 4 at 2:39 pm",
+    statusHeadline: "Label Created",
+    trackingHistory: [
+      { label: "Label Created", timestamp: "March 18 at 4:00 pm" },
+    ],
+    orderItems: FOUR_ITEMS,
+  },
+  {
+    id: "2",
+    trackingNumber: "UUS5A62471982914608",
+    serviceLevel: "Premium Economy",
+    carrier: "Veho",
+    order: "#1160",
+    status: "Picked Up",
+    labelCreated: "March 4 at 2:49pm",
+    destination: "Los Angeles, CA",
+    price: "$8.44",
+    carrierFull: "UniUni Standard",
+    weight: "2.00 lbs",
+    dimensions: "11.00w x 14.00l x 4.00h in",
+    recipientName: "Bay Area Sam",
+    address: "939 La Mesa Ter",
+    city: "Sunnyvale, CA 94086-1707",
+    phone: "(732) 673-9846",
+    created: "March 4 at 2:39 pm",
+    statusHeadline: "Picked Up",
+    trackingHistory: [
+      { label: "Picked Up", timestamp: "March 18 at 4:00 pm" },
+      { label: "Pickup acknowledged, not assigned to driver yet", timestamp: "March 18 at 4:00 pm" },
+      { label: "Pickup Created", timestamp: "March 18 at 4:00 pm" },
+      { label: "Label Created", timestamp: "March 18 at 4:00 pm" },
+    ],
+    orderItems: FOUR_ITEMS,
+  },
+  {
+    id: "3",
+    trackingNumber: "UUS5A62471982914608",
+    serviceLevel: "Ground Advantage",
+    carrier: "USPS",
+    order: "#1159",
+    status: "In Transit",
+    labelCreated: "March 4 at 2:49pm",
+    destination: "Atlanta, GA",
+    price: "$8.44",
+    carrierFull: "UniUni Standard",
+    weight: "2.00 lbs",
+    dimensions: "11.00w x 14.00l x 4.00h in",
+    recipientName: "Bay Area Sam",
+    address: "939 La Mesa Ter",
+    city: "Sunnyvale, CA 94086-1707",
+    phone: "(732) 673-9846",
+    created: "March 4 at 2:39 pm",
+    statusHeadline: "Estimated Delivery Tuesday March 24, 2026",
+    trackingHistory: [
+      { label: "In Transit", description: "Los Angeles, CA 92376", hasMoreLink: true },
+      { label: "Picked Up", timestamp: "March 18 at 4:00 pm" },
+      { label: "Pickup acknowledged, not assigned to driver yet", timestamp: "March 18 at 4:00 pm" },
+      { label: "Pickup Created", timestamp: "March 18 at 4:00 pm" },
+      { label: "Label Created", timestamp: "March 18 at 4:00 pm" },
+    ],
+    orderItems: FOUR_ITEMS,
+  },
+  {
+    id: "4",
+    trackingNumber: "UUS5A62471982914608",
+    serviceLevel: "Ground",
+    carrier: "OnTrac",
+    order: "#1158",
+    status: "Damaged",
+    labelCreated: "March 4 at 2:49pm",
+    destination: "New York, NY",
+    price: "$8.44",
+    carrierFull: "UniUni Standard",
+    weight: "2.00 lbs",
+    dimensions: "11.00w x 14.00l x 4.00h in",
+    recipientName: "Bay Area Sam",
+    address: "939 La Mesa Ter",
+    city: "Sunnyvale, CA 94086-1707",
+    phone: "(732) 673-9846",
+    created: "March 4 at 2:39 pm",
+    statusHeadline: "Package Damaged",
+    trackingHistory: [
+      { label: "Package Damaged", description: "Package reported damaged during delivery.", timestamp: "March 24 at 3:27 pm" },
+      { label: "In Transit", description: "Los Angeles, CA 92376", hasMoreLink: true },
+      { label: "Picked Up", timestamp: "March 18 at 4:00 pm" },
+      { label: "Pickup acknowledged, not assigned to driver yet", timestamp: "March 18 at 4:00 pm" },
+      { label: "Pickup Created", timestamp: "March 18 at 4:00 pm" },
+      { label: "Label Created", timestamp: "March 18 at 4:00 pm" },
+    ],
+    orderItems: FOUR_ITEMS,
+  },
+  {
+    id: "5",
+    trackingNumber: "UUS5A62471982914608",
+    serviceLevel: "Standard",
+    carrier: "FedEx",
+    order: "#1157",
+    status: "In Transit",
+    labelCreated: "March 4 at 2:49pm",
+    destination: "San Francisco, CA",
+    price: "$8.44",
+    carrierFull: "UniUni Standard",
+    weight: "2.00 lbs",
+    dimensions: "11.00w x 14.00l x 4.00h in",
+    recipientName: "Bay Area Sam",
+    address: "939 La Mesa Ter",
+    city: "Sunnyvale, CA 94086-1707",
+    phone: "(732) 673-9846",
+    created: "March 4 at 2:39 pm",
+    statusHeadline: "Estimated Delivery Tuesday March 24, 2026",
+    trackingHistory: [
+      { label: "In Transit", description: "Los Angeles, CA 92376", hasMoreLink: true },
+      { label: "Picked Up", timestamp: "March 18 at 4:00 pm" },
+      { label: "Pickup acknowledged, not assigned to driver yet", timestamp: "March 18 at 4:00 pm" },
+      { label: "Pickup Created", timestamp: "March 18 at 4:00 pm" },
+      { label: "Label Created", timestamp: "March 18 at 4:00 pm" },
+    ],
+    orderItems: FOUR_ITEMS,
+  },
+  {
+    id: "6",
+    trackingNumber: "UUS5A62471982914608",
+    serviceLevel: "Standard",
+    carrier: "UPS",
+    order: "#1156",
+    status: "Cancelled",
+    labelCreated: "March 4 at 2:49pm",
+    destination: "New York, NY",
+    price: "$8.44",
+    carrierFull: "UniUni Standard",
+    weight: "2.00 lbs",
+    dimensions: "11.00w x 14.00l x 4.00h in",
+    recipientName: "Bay Area Sam",
+    address: "939 La Mesa Ter",
+    city: "Sunnyvale, CA 94086-1707",
+    phone: "(732) 673-9846",
+    created: "March 4 at 2:39 pm",
+    statusHeadline: "Cancelled",
+    trackingHistory: [
+      { label: "Cancelled", description: "Ordered cancelled by Merchant", timestamp: "March 24 at 3:27 pm" },
+      { label: "Label Created", timestamp: "March 18 at 4:00 pm" },
+    ],
+    orderItems: FOUR_ITEMS,
+  },
+  {
+    id: "7",
+    trackingNumber: "UUS5A62471982914608",
+    serviceLevel: "Premium Economy",
+    carrier: "Veho",
+    order: "#1155",
+    status: "Delivered",
+    labelCreated: "March 4 at 2:49pm",
+    destination: "Los Angeles, CA",
+    price: "$8.44",
+    carrierFull: "UniUni Standard",
+    weight: "2.00 lbs",
+    dimensions: "11.00w x 14.00l x 4.00h in",
+    recipientName: "Bay Area Sam",
+    address: "939 La Mesa Ter",
+    city: "Sunnyvale, CA 94086-1707",
+    phone: "(732) 673-9846",
+    created: "March 4 at 2:39 pm",
+    statusHeadline: "Delivered on March 24 at 4:05 pm",
+    trackingHistory: [
+      { label: "Delivered", description: "This shipment has been delivered.", timestamp: "March 24 at 4:05 pm" },
+      { label: "Out for Delivery", description: "The shipment is currently on its last-mile and will be delivered soon.", timestamp: "March 24 at 3:27 pm" },
+      { label: "In Transit", description: "Los Angeles, CA 92376", hasMoreLink: true },
+      { label: "Picked Up", timestamp: "March 18 at 4:00 pm" },
+      { label: "Pickup acknowledged, not assigned to driver yet", timestamp: "March 18 at 4:00 pm" },
+      { label: "Pickup Created", timestamp: "March 18 at 4:00 pm" },
+      { label: "Label Created", timestamp: "March 18 at 4:00 pm" },
+    ],
+    orderItems: FOUR_ITEMS,
+  },
+  {
+    id: "8",
+    trackingNumber: "UUS5A62471982914608",
+    serviceLevel: "Ground Advantage",
+    carrier: "USPS",
+    order: "#1154",
+    status: "Delivered",
+    labelCreated: "March 4 at 2:49pm",
+    destination: "Atlanta, GA",
+    price: "$8.44",
+    carrierFull: "UniUni Standard",
+    weight: "2.00 lbs",
+    dimensions: "11.00w x 14.00l x 4.00h in",
+    recipientName: "Bay Area Sam",
+    address: "939 La Mesa Ter",
+    city: "Sunnyvale, CA 94086-1707",
+    phone: "(732) 673-9846",
+    created: "March 4 at 2:39 pm",
+    statusHeadline: "Delivered on March 24 at 4:05 pm",
+    trackingHistory: [
+      { label: "Delivered", description: "This shipment has been delivered.", timestamp: "March 24 at 4:05 pm" },
+      { label: "Out for Delivery", description: "The shipment is currently on its last-mile and will be delivered soon.", timestamp: "March 24 at 3:27 pm" },
+      { label: "In Transit", description: "Los Angeles, CA 92376", hasMoreLink: true },
+      { label: "Picked Up", timestamp: "March 18 at 4:00 pm" },
+      { label: "Pickup acknowledged, not assigned to driver yet", timestamp: "March 18 at 4:00 pm" },
+      { label: "Pickup Created", timestamp: "March 18 at 4:00 pm" },
+      { label: "Label Created", timestamp: "March 18 at 4:00 pm" },
+    ],
+    orderItems: FOUR_ITEMS,
+  },
+  {
+    id: "9",
+    trackingNumber: "UUS5A62471982914608",
+    serviceLevel: "Ground",
+    carrier: "UPS",
+    order: "#1153",
+    status: "Return to Sender",
+    labelCreated: "March 4 at 2:49pm",
+    destination: "New York, NY",
+    price: "$8.44",
+    carrierFull: "UniUni Standard",
+    weight: "2.00 lbs",
+    dimensions: "11.00w x 14.00l x 4.00h in",
+    recipientName: "Bay Area Sam",
+    address: "939 La Mesa Ter",
+    city: "Sunnyvale, CA 94086-1707",
+    phone: "(732) 673-9846",
+    created: "March 4 at 2:39 pm",
+    statusHeadline: "Return to Sender",
+    trackingHistory: [
+      { label: "Return to Sender", description: "The package was not accepted at delivery and is being returned.", timestamp: "March 24 at 3:27 pm" },
+      { label: "In Transit", description: "Los Angeles, CA 92376", hasMoreLink: true },
+      { label: "Picked Up", timestamp: "March 18 at 4:00 pm" },
+      { label: "Pickup acknowledged, not assigned to driver yet", timestamp: "March 18 at 4:00 pm" },
+      { label: "Pickup Created", timestamp: "March 18 at 4:00 pm" },
+      { label: "Label Created", timestamp: "March 18 at 4:00 pm" },
+    ],
+    orderItems: FOUR_ITEMS,
+  },
+  {
+    id: "10",
+    trackingNumber: "UUS5A62471982914608",
+    serviceLevel: "Standard",
+    carrier: "FedEx",
+    order: "#1152",
+    status: "Delivered",
+    labelCreated: "March 4 at 2:49pm",
+    destination: "San Francisco, CA",
+    price: "$8.44",
+    carrierFull: "UniUni Standard",
+    weight: "2.00 lbs",
+    dimensions: "11.00w x 14.00l x 4.00h in",
+    recipientName: "Bay Area Sam",
+    address: "939 La Mesa Ter",
+    city: "Sunnyvale, CA 94086-1707",
+    phone: "(732) 673-9846",
+    created: "March 4 at 2:39 pm",
+    statusHeadline: "Delivered on March 24 at 4:05 pm",
+    trackingHistory: [
+      { label: "Delivered", description: "This shipment has been delivered.", timestamp: "March 24 at 4:05 pm" },
+      { label: "Out for Delivery", description: "The shipment is currently on its last-mile and will be delivered soon.", timestamp: "March 24 at 3:27 pm" },
+      { label: "In Transit", description: "Los Angeles, CA 92376", hasMoreLink: true },
+      { label: "Picked Up", timestamp: "March 18 at 4:00 pm" },
+      { label: "Pickup acknowledged, not assigned to driver yet", timestamp: "March 18 at 4:00 pm" },
+      { label: "Pickup Created", timestamp: "March 18 at 4:00 pm" },
+      { label: "Label Created", timestamp: "March 18 at 4:00 pm" },
+    ],
+    orderItems: FOUR_ITEMS,
+  },
+  {
+    id: "11",
+    trackingNumber: "UUS5A62471982914608",
+    serviceLevel: "Premium Economy",
+    carrier: "Veho",
+    order: "#1151",
+    status: "Out for Delivery",
+    labelCreated: "March 4 at 2:49pm",
+    destination: "Los Angeles, CA",
+    price: "$8.44",
+    carrierFull: "UniUni Standard",
+    weight: "2.00 lbs",
+    dimensions: "11.00w x 14.00l x 4.00h in",
+    recipientName: "Bay Area Sam",
+    address: "939 La Mesa Ter",
+    city: "Sunnyvale, CA 94086-1707",
+    phone: "(732) 673-9846",
+    created: "March 4 at 2:39 pm",
+    statusHeadline: "Out for Delivery",
+    trackingHistory: [
+      { label: "Out for Delivery", description: "The shipment is currently on its last-mile and will be delivered soon.", timestamp: "March 24 at 3:27 pm" },
+      { label: "In Transit", description: "Los Angeles, CA 92376", hasMoreLink: true },
+      { label: "Picked Up", timestamp: "March 18 at 4:00 pm" },
+      { label: "Pickup acknowledged, not assigned to driver yet", timestamp: "March 18 at 4:00 pm" },
+      { label: "Pickup Created", timestamp: "March 18 at 4:00 pm" },
+      { label: "Label Created", timestamp: "March 18 at 4:00 pm" },
+    ],
+    orderItems: FOUR_ITEMS,
+  },
+  {
+    id: "12",
+    trackingNumber: "UUS5A62471982914608",
+    serviceLevel: "Ground Advantage",
+    carrier: "USPS",
+    order: "#1150",
+    status: "Pickup Assigned",
+    labelCreated: "March 4 at 2:49pm",
+    destination: "Atlanta, GA",
+    price: "$8.44",
+    carrierFull: "UniUni Standard",
+    weight: "2.00 lbs",
+    dimensions: "11.00w x 14.00l x 4.00h in",
+    recipientName: "Bay Area Sam",
+    address: "939 La Mesa Ter",
+    city: "Sunnyvale, CA 94086-1707",
+    phone: "(732) 673-9846",
+    created: "March 4 at 2:39 pm",
+    statusHeadline: "Pickup Assigned",
+    trackingHistory: [
+      { label: "Pickup Created", timestamp: "March 18 at 4:00 pm" },
+      { label: "Label Created", timestamp: "March 18 at 4:00 pm" },
+    ],
+    orderItems: FOUR_ITEMS,
+  },
+];
