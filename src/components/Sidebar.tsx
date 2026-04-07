@@ -19,47 +19,9 @@ import {
   PanelLeftOpen,
 } from "lucide-react";
 
-// ─── Parsel Wordmark ─────────────────────────────────────────────────────────
-// Matches the Figma logo: orange pill/rect containing white "p", + "arsel" in dark text
+// ─── Parsel Logo ─────────────────────────────────────────────────────────────
 
-function ParselLogo() {
-  return (
-    <div className="flex items-center gap-0 leading-none select-none">
-      {/* Orange badge with white "p" */}
-      <div
-        className="flex items-center justify-center rounded-[4px] shrink-0"
-        style={{ backgroundColor: "#E8480C", width: 22, height: 20 }}
-      >
-        <span
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontWeight: 700,
-            fontSize: 14,
-            color: "#fff",
-            lineHeight: 1,
-            letterSpacing: "-0.02em",
-          }}
-        >
-          p
-        </span>
-      </div>
-      {/* "arsel" in dark text */}
-      <span
-        style={{
-          fontFamily: "Inter, sans-serif",
-          fontWeight: 700,
-          fontSize: 16,
-          color: "#0a0a0a",
-          letterSpacing: "-0.03em",
-          lineHeight: 1,
-          paddingLeft: 2,
-        }}
-      >
-        arsel
-      </span>
-    </div>
-  );
-}
+import PARSEL_LOGO from "../assets/parsel-logo.svg";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -147,19 +109,11 @@ export function Sidebar() {
       <div className="p-2">
         <div className={cn("flex items-center px-2 py-2", collapsed && "justify-center")}>
           {!collapsed ? (
-            <div className="flex items-center gap-2 flex-1">
-              <ParselLogo />
+            <div className="flex items-center flex-1">
+              <img src={PARSEL_LOGO} alt="Parsel" className="h-5 w-auto" />
             </div>
           ) : (
-            /* Collapsed: just the orange badge */
-            <div
-              className="rounded-[4px] flex items-center justify-center shrink-0"
-              style={{ backgroundColor: "#E8480C", width: 22, height: 20 }}
-            >
-              <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: 14, color: "#fff", lineHeight: 1 }}>
-                p
-              </span>
-            </div>
+            <img src={PARSEL_LOGO} alt="Parsel" className="h-5 w-auto" />
           )}
           {/* Collapse toggle */}
           <button
