@@ -477,6 +477,7 @@ export function Orders() {
                   <th className="py-3 px-3 text-left text-[10px] font-semibold tracking-wider text-[#0a0a0a]/50 uppercase w-36">Products</th>
                   <th className="py-3 px-3 text-left text-[10px] font-semibold tracking-wider text-[#0a0a0a]/50 uppercase w-44">Created</th>
                   <th className="py-3 px-3 text-left text-[10px] font-semibold tracking-wider text-[#0a0a0a]/50 uppercase">Destination</th>
+                  <th className="py-3 px-3 text-left text-[10px] font-semibold tracking-wider text-[#0a0a0a]/50 uppercase w-48">Tags</th>
                   <th className="py-3 px-3 w-12" />
                 </tr>
               </thead>
@@ -531,16 +532,20 @@ export function Orders() {
                         <span className="text-sm text-[#0a0a0a]/70">{order.created}</span>
                       </td>
 
-                      {/* Destination + Tags */}
+                      {/* Destination */}
                       <td className="py-4 px-3">
-                        <div className="flex flex-col gap-1">
-                          <span className="text-sm text-[#0a0a0a]/70">{order.destination}</span>
-                          {order.tags.length > 0 && (
-                            <div className="flex items-center gap-1 flex-wrap">
-                              {order.tags.map((t) => <TagPill key={t} label={t} />)}
-                            </div>
-                          )}
-                        </div>
+                        <span className="text-sm text-[#0a0a0a]/70">{order.destination}</span>
+                      </td>
+
+                      {/* Tags */}
+                      <td className="py-4 px-3 w-48">
+                        {order.tags.length > 0 ? (
+                          <div className="flex items-center gap-1 flex-wrap">
+                            {order.tags.map((t) => <TagPill key={t} label={t} />)}
+                          </div>
+                        ) : (
+                          <span className="text-sm text-[#0a0a0a]/30">—</span>
+                        )}
                       </td>
 
                       {/* Actions */}
@@ -553,7 +558,7 @@ export function Orders() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={7} className="py-16 text-center">
+                    <td colSpan={8} className="py-16 text-center">
                       <div className="flex flex-col items-center gap-2">
                         <div className="w-10 h-10 rounded-full bg-[#f3f3ed] flex items-center justify-center">
                           <ShoppingCart size={18} className="text-[#0a0a0a]/30" />
