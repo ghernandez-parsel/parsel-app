@@ -140,7 +140,7 @@ function PickupCard({ pickup }: { pickup: typeof PICKUPS[0] }) {
     pickup.status === "Picked Up";
 
   return (
-    <div className="bg-white border border-[#e5e5de] rounded-xl p-5 flex flex-col gap-4">
+    <div className="bg-white border border-[#e5e5de] rounded-xl p-5 flex flex-col gap-4 shadow-sm">
       {/* Top row */}
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-3">
@@ -514,9 +514,9 @@ export function Pickups() {
             </div>
 
             {/* Cards grid */}
-            <div className="p-4">
+            <div className="p-4 bg-[#f3f3ed] rounded-b-xl">
               {filtered.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {filtered.map((pickup) => (
                     <PickupCard key={pickup.id} pickup={pickup} />
                   ))}
