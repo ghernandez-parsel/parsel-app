@@ -15,7 +15,6 @@ import {
 } from "lucide-react";
 import { cn } from "../lib/utils";
 import { PICKUPS, type PickupStatus } from "../data/pickups";
-import { CarrierTile } from "../components/CarrierTile";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -145,7 +144,10 @@ function PickupCard({ pickup }: { pickup: typeof PICKUPS[0] }) {
       {/* Top row */}
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-3">
-          <CarrierTile carrier={pickup.carrier} size="sm" />
+          {/* Generic truck icon — each pickup is a batch of multiple carriers */}
+          <div className="w-10 h-10 rounded-lg bg-[#f3f3ed] border border-[#e5e5de] flex items-center justify-center shrink-0">
+            <Truck size={18} className="text-[#0a0a0a]/50" />
+          </div>
           <div>
             <p className="text-sm font-semibold text-[#0a0a0a]">{pickup.date}</p>
             <p className="text-xs text-[#0a0a0a]/60">{pickup.statusDetail}</p>
@@ -396,15 +398,18 @@ export function Pickups() {
     const matchesSearch =
       !q ||
       p.id.toLowerCase().includes(q) ||
-      p.carrier.toLowerCase().includes(q) ||
       p.destination.toLowerCase().includes(q) ||
-      p.date.toLowerCase().includes(q);
+      p.date.toLowerCase().includes(q) ||
+      // Search digs into every carrier inside the batch
+      p.carriers.some((c) => c.toLowerCase().includes(q));
 
     const matchesStatus =
       selectedStatuses.length === 0 || selectedStatuses.includes(p.status);
 
+    // A pickup matches if ANY of its carriers is in the selected set
     const matchesCarrier =
-      selectedCarriers.length === 0 || selectedCarriers.includes(p.carrier);
+      selectedCarriers.length === 0 ||
+      p.carriers.some((c) => selectedCarriers.includes(c));
 
     const matchesDate =
       !selectedDateRange || isInRange(p.dateISO, selectedDateRange);
