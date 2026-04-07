@@ -5,6 +5,7 @@ import { Shipments } from "./pages/Shipments";
 import { ShipmentDetail } from "./pages/ShipmentDetail";
 import { Settings } from "./pages/Settings";
 import { Pickups } from "./pages/Pickups";
+import { Orders } from "./pages/Orders";
 
 function Layout() {
   return (
@@ -13,7 +14,7 @@ function Layout() {
       <main className="flex-1 overflow-auto">
         <Routes>
           <Route path="/" element={<Navigate to="/orders" replace />} />
-          <Route path="/orders" element={<PlaceholderPage title="Orders" description="View and manage all your customer orders here." />} />
+          <Route path="/orders" element={<Orders />} />
           <Route path="/shipments" element={<Shipments />} />
           <Route path="/shipments/:id" element={<ShipmentDetail />} />
           <Route path="/pickups" element={<Pickups />} />
