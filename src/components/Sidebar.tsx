@@ -19,6 +19,48 @@ import {
   PanelLeftOpen,
 } from "lucide-react";
 
+// ─── Parsel Wordmark ─────────────────────────────────────────────────────────
+// Matches the Figma logo: orange pill/rect containing white "p", + "arsel" in dark text
+
+function ParselLogo() {
+  return (
+    <div className="flex items-center gap-0 leading-none select-none">
+      {/* Orange badge with white "p" */}
+      <div
+        className="flex items-center justify-center rounded-[4px] shrink-0"
+        style={{ backgroundColor: "#E8480C", width: 22, height: 20 }}
+      >
+        <span
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontWeight: 700,
+            fontSize: 14,
+            color: "#fff",
+            lineHeight: 1,
+            letterSpacing: "-0.02em",
+          }}
+        >
+          p
+        </span>
+      </div>
+      {/* "arsel" in dark text */}
+      <span
+        style={{
+          fontFamily: "Inter, sans-serif",
+          fontWeight: 700,
+          fontSize: 16,
+          color: "#0a0a0a",
+          letterSpacing: "-0.03em",
+          lineHeight: 1,
+          paddingLeft: 2,
+        }}
+      >
+        arsel
+      </span>
+    </div>
+  );
+}
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 interface NavItem {
@@ -106,15 +148,17 @@ export function Sidebar() {
         <div className={cn("flex items-center px-2 py-2", collapsed && "justify-center")}>
           {!collapsed ? (
             <div className="flex items-center gap-2 flex-1">
-              {/* Parsel wordmark */}
-              <span className="font-bold text-xl tracking-tight">
-                <span className="text-[#E8480C]">parsel</span>
-              </span>
+              <ParselLogo />
             </div>
           ) : (
-            /* Collapsed: show icon mark */
-            <div className="w-8 h-8 bg-[#E8480C] rounded-md flex items-center justify-center">
-              <span className="text-white font-bold text-sm leading-none">p</span>
+            /* Collapsed: just the orange badge */
+            <div
+              className="rounded-[4px] flex items-center justify-center shrink-0"
+              style={{ backgroundColor: "#E8480C", width: 22, height: 20 }}
+            >
+              <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: 14, color: "#fff", lineHeight: 1 }}>
+                p
+              </span>
             </div>
           )}
           {/* Collapse toggle */}
