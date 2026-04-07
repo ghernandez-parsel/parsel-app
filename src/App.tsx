@@ -4,6 +4,7 @@ import { PlaceholderPage } from "./pages/PlaceholderPage";
 import { Shipments } from "./pages/Shipments";
 import { ShipmentDetail } from "./pages/ShipmentDetail";
 import { Settings } from "./pages/Settings";
+import { Pickups } from "./pages/Pickups";
 
 function Layout() {
   return (
@@ -15,7 +16,7 @@ function Layout() {
           <Route path="/orders" element={<PlaceholderPage title="Orders" description="View and manage all your customer orders here." />} />
           <Route path="/shipments" element={<Shipments />} />
           <Route path="/shipments/:id" element={<ShipmentDetail />} />
-          <Route path="/pickups" element={<PlaceholderPage title="Pickups" description="Schedule and manage carrier pickups." />} />
+          <Route path="/pickups" element={<Pickups />} />
           <Route path="/tracking" element={<PlaceholderPage title="Tracking" description="Real-time tracking for all your packages." />} />
           <Route path="/analytics" element={<PlaceholderPage title="Analytics" description="Insights and performance metrics for your operations." />} />
           <Route path="/claims" element={<PlaceholderPage title="Claims" description="File and manage shipping claims." />} />
