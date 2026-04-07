@@ -18,6 +18,7 @@ import {
   PanelLeft,
 } from "lucide-react";
 import { cn } from "../lib/utils";
+import { useSidebar } from "../lib/sidebar-context";
 import { SHIPMENTS } from "../data/shipments";
 import { CarrierTile } from "../components/CarrierTile";
 
@@ -99,6 +100,7 @@ function FilterDropdown({ icon, label }: { icon: React.ReactNode; label: string 
 // ─── Main Page ────────────────────────────────────────────────────────────────
 
 export function Shipments() {
+  const { toggle: toggleSidebar } = useSidebar();
   const [search, setSearch] = useState("");
   const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
 
@@ -127,7 +129,7 @@ export function Shipments() {
     <div className="flex flex-col h-full overflow-auto bg-white">
       {/* Header */}
       <div className="flex items-center gap-3 px-6 h-16 border-b border-[#e5e5de] shrink-0">
-        <button className="p-1.5 rounded-md hover:bg-[#f3f3ed] text-[#0a0a0a]/40 hover:text-[#0a0a0a] transition-colors">
+        <button onClick={toggleSidebar} className="p-1.5 rounded-md hover:bg-[#f3f3ed] text-[#0a0a0a]/40 hover:text-[#0a0a0a] transition-colors">
           <PanelLeft size={16} />
         </button>
         <div className="w-px h-4 bg-[#e5e5de]" />

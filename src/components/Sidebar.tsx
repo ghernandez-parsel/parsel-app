@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { cn } from "../lib/utils";
+import { useSidebar } from "../lib/sidebar-context";
 import {
   Inbox,
   Package,
@@ -15,8 +15,6 @@ import {
   ChevronRight,
   ChevronsUpDown,
   GalleryVerticalEnd,
-  PanelLeftClose,
-  PanelLeftOpen,
 } from "lucide-react";
 
 // ─── Parsel Logo ─────────────────────────────────────────────────────────────
@@ -96,7 +94,7 @@ function MenuButton({
 // ─── Main Sidebar ─────────────────────────────────────────────────────────────
 
 export function Sidebar() {
-  const [collapsed, setCollapsed] = useState(false);
+  const { collapsed } = useSidebar();
 
   return (
     <aside
@@ -107,40 +105,16 @@ export function Sidebar() {
     >
       {/* ── Logo ── */}
       <div className="p-2">
-        <div className={cn("flex items-center px-2 py-2", collapsed && "justify-center")}>
-          {!collapsed ? (
-            <div className="flex items-center flex-1">
-              <img src={PARSEL_LOGO} alt="Parsel" className="h-5 w-auto" />
-            </div>
-          ) : (
-            <img src={PARSEL_LOGO} alt="Parsel" className="h-5 w-auto" />
+        <div className="flex items-center px-2 py-2">
+          {!collapsed && (
+            <img
+              src={PARSEL_LOGO}
+              alt="Parsel"
+              style={{ height: 22, width: 46, objectFit: "contain" }}
+            />
           )}
-          {/* Collapse toggle */}
-          <button
-            onClick={() => setCollapsed((c) => !c)}
-            className={cn(
-              "p-1 rounded-md hover:bg-[#eaeae4] text-[#0a0a0a] opacity-40 hover:opacity-80 transition-opacity",
-              collapsed && "hidden"
-            )}
-            title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-          >
-            <PanelLeftClose size={14} />
-          </button>
         </div>
       </div>
-
-      {/* Expand button when collapsed */}
-      {collapsed && (
-        <div className="flex justify-center px-2 pb-1">
-          <button
-            onClick={() => setCollapsed(false)}
-            className="p-1 rounded-md hover:bg-[#eaeae4] text-[#0a0a0a] opacity-40 hover:opacity-80 transition-opacity"
-            title="Expand sidebar"
-          >
-            <PanelLeftOpen size={14} />
-          </button>
-        </div>
-      )}
 
       {/* ── Company selector ── */}
       <div className="p-2">

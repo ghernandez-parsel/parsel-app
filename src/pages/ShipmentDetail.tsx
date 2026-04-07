@@ -12,6 +12,7 @@ import {
   Package,
 } from "lucide-react";
 import { cn } from "../lib/utils";
+import { useSidebar } from "../lib/sidebar-context";
 import { SHIPMENTS, type ShipmentStatus } from "../data/shipments";
 import { CarrierTile } from "../components/CarrierTile";
 
@@ -108,6 +109,7 @@ function OrderItemCard({ item }: { item: { name: string; weight: string; units: 
 // ─── Main Page ────────────────────────────────────────────────────────────────
 
 export function ShipmentDetail() {
+  const { toggle: toggleSidebar } = useSidebar();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const shipment = SHIPMENTS.find((s) => s.id === id);
@@ -131,7 +133,7 @@ export function ShipmentDetail() {
       <div className="flex items-center justify-between px-6 h-16 border-b border-[#e5e5de] shrink-0">
         {/* Left: breadcrumb */}
         <div className="flex items-center gap-3">
-          <button className="p-1.5 rounded-md hover:bg-[#f3f3ed] text-[#0a0a0a]/40 hover:text-[#0a0a0a] transition-colors">
+          <button onClick={toggleSidebar} className="p-1.5 rounded-md hover:bg-[#f3f3ed] text-[#0a0a0a]/40 hover:text-[#0a0a0a] transition-colors">
             <PanelLeft size={16} />
           </button>
           <div className="w-px h-4 bg-[#e5e5de]" />

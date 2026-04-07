@@ -14,6 +14,7 @@ import {
   Check,
 } from "lucide-react";
 import { cn } from "../lib/utils";
+import { useSidebar } from "../lib/sidebar-context";
 import { PICKUPS, type PickupStatus } from "../data/pickups";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -384,6 +385,7 @@ function DateRangeDropdown({ selected, onChange }: DateRangeDropdownProps) {
 // ─── Main Page ────────────────────────────────────────────────────────────────
 
 export function Pickups() {
+  const { toggle: toggleSidebar } = useSidebar();
   const [search, setSearch]               = useState("");
   const [selectedStatuses, setStatuses]   = useState<string[]>([]);
   const [selectedCarriers, setCarriers]   = useState<string[]>([]);
@@ -433,7 +435,7 @@ export function Pickups() {
       {/* ── Header ── */}
       <div className="flex items-center justify-between px-6 h-16 border-b border-[#e5e5de] shrink-0">
         <div className="flex items-center gap-3">
-          <button className="p-1.5 rounded-md hover:bg-[#f3f3ed] text-[#0a0a0a]/40 hover:text-[#0a0a0a] transition-colors">
+          <button onClick={toggleSidebar} className="p-1.5 rounded-md hover:bg-[#f3f3ed] text-[#0a0a0a]/40 hover:text-[#0a0a0a] transition-colors">
             <PanelLeft size={16} />
           </button>
           <div className="w-px h-4 bg-[#e5e5de]" />

@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Sidebar } from "./components/Sidebar";
+import { SidebarProvider } from "./lib/sidebar-context";
 import { PlaceholderPage } from "./pages/PlaceholderPage";
 import { Shipments } from "./pages/Shipments";
 import { ShipmentDetail } from "./pages/ShipmentDetail";
@@ -34,7 +35,9 @@ function Layout() {
 export default function App() {
   return (
     <BrowserRouter>
-      <Layout />
+      <SidebarProvider>
+        <Layout />
+      </SidebarProvider>
     </BrowserRouter>
   );
 }
