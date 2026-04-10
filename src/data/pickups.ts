@@ -1,6 +1,6 @@
 export type PickupStatus =
   | "Scheduled"
-  | "Assigned"
+  | "Driver Assigned"
   | "En Route"
   | "Picked Up"
   | "Dropped Off"
@@ -8,10 +8,10 @@ export type PickupStatus =
 
 export interface Pickup {
   id: string;
-  date: string;          // e.g. "Tuesday, April 7"
-  dateISO: string;       // e.g. "2026-04-07"  (for date-range filtering)
-  timeWindow: string;    // e.g. "3:00pm - 4:00pm"
-  statusDetail: string;  // subtitle shown below date on the card
+  pickupId: string;      // display ID e.g. "#787AFA4B"
+  date: string;          // e.g. "April 7, 2026 at 3:00pm - 4:00pm"
+  dateISO: string;       // e.g. "2026-04-07" for date-range filtering
+  statusDetail: string;  // subtitle shown below pickup ID on the card
   status: PickupStatus;
   carriers: string[];    // all carriers bundled in this batch pickup
   items: number;
@@ -22,23 +22,23 @@ export interface Pickup {
 export const PICKUPS: Pickup[] = [
   {
     id: "PU-001",
-    date: "Tuesday, April 7",
+    pickupId: "#787AFA4B",
+    date: "April 7, 2026 at 3:00pm - 4:00pm",
     dateISO: "2026-04-07",
-    timeWindow: "3:00pm - 4:00pm",
-    statusDetail: "3:00pm - 4:00pm",
+    statusDetail: "April 7, 2026 at 3:00pm - 4:00pm",
     status: "Scheduled",
     carriers: ["UPS", "FedEx", "USPS"],
-    items: 3,
-    cost: "$23.88",
+    items: 12,
+    cost: "$48.33",
     destination: "Salt Lake City, UT 84104",
   },
   {
     id: "PU-002",
-    date: "Tuesday, April 7",
+    pickupId: "#787AFA4B",
+    date: "April 7, 2026 at 3:00pm - 4:00pm",
     dateISO: "2026-04-07",
-    timeWindow: "3:00pm - 4:00pm",
-    statusDetail: "3:00pm - 4:00pm",
-    status: "Assigned",
+    statusDetail: "April 7, 2026 at 3:00pm - 4:00pm",
+    status: "Driver Assigned",
     carriers: ["FedEx", "Veho"],
     items: 3,
     cost: "$23.88",
@@ -46,10 +46,10 @@ export const PICKUPS: Pickup[] = [
   },
   {
     id: "PU-003",
-    date: "Tuesday, April 7",
+    pickupId: "#787AFA4B",
+    date: "April 7, 2026 at 3:00pm - 4:00pm",
     dateISO: "2026-04-07",
-    timeWindow: "3:00pm - 4:00pm",
-    statusDetail: "Arriving at 3:26pm",
+    statusDetail: "Arriving Today at 3:26pm",
     status: "En Route",
     carriers: ["USPS", "OnTrac", "UPS"],
     items: 3,
@@ -58,10 +58,10 @@ export const PICKUPS: Pickup[] = [
   },
   {
     id: "PU-004",
-    date: "Tuesday, April 7",
+    pickupId: "#787AFA4B",
+    date: "April 7, 2026 at 3:00pm - 4:00pm",
     dateISO: "2026-04-07",
-    timeWindow: "3:00pm - 4:00pm",
-    statusDetail: "Picked up at 3:37pm",
+    statusDetail: "Picked up today at 3:37pm",
     status: "Picked Up",
     carriers: ["Veho", "FedEx"],
     items: 3,
@@ -70,10 +70,10 @@ export const PICKUPS: Pickup[] = [
   },
   {
     id: "PU-005",
-    date: "Tuesday, April 7",
+    pickupId: "#787AFA4B",
+    date: "April 7, 2026 at 3:00pm - 4:00pm",
     dateISO: "2026-04-07",
-    timeWindow: "3:00pm - 4:00pm",
-    statusDetail: "Dropped off at 4:46pm",
+    statusDetail: "Dropped off today at 4:46pm",
     status: "Dropped Off",
     carriers: ["OnTrac", "USPS", "UniUni"],
     items: 3,
@@ -82,10 +82,10 @@ export const PICKUPS: Pickup[] = [
   },
   {
     id: "PU-006",
-    date: "Tuesday, April 7",
+    pickupId: "#787AFA4B",
+    date: "April 7, 2026 at 3:00pm - 4:00pm",
     dateISO: "2026-04-07",
-    timeWindow: "3:00pm - 4:00pm",
-    statusDetail: "3:00pm - 4:00pm",
+    statusDetail: "Cancelled on April 6, 2026",
     status: "Cancelled",
     carriers: ["UPS", "FedEx"],
     items: 3,
@@ -94,10 +94,10 @@ export const PICKUPS: Pickup[] = [
   },
   {
     id: "PU-007",
-    date: "Wednesday, April 8",
+    pickupId: "#3C91B22A",
+    date: "April 8, 2026 at 10:00am - 11:00am",
     dateISO: "2026-04-08",
-    timeWindow: "10:00am - 11:00am",
-    statusDetail: "10:00am - 11:00am",
+    statusDetail: "April 8, 2026 at 10:00am - 11:00am",
     status: "Scheduled",
     carriers: ["FedEx", "UPS", "Veho", "USPS"],
     items: 5,
@@ -106,11 +106,11 @@ export const PICKUPS: Pickup[] = [
   },
   {
     id: "PU-008",
-    date: "Wednesday, April 8",
+    pickupId: "#A14D7F03",
+    date: "April 8, 2026 at 2:00pm - 3:00pm",
     dateISO: "2026-04-08",
-    timeWindow: "2:00pm - 3:00pm",
-    statusDetail: "2:00pm - 3:00pm",
-    status: "Assigned",
+    statusDetail: "April 8, 2026 at 2:00pm - 3:00pm",
+    status: "Driver Assigned",
     carriers: ["USPS", "OnTrac"],
     items: 2,
     cost: "$14.50",
@@ -118,10 +118,10 @@ export const PICKUPS: Pickup[] = [
   },
   {
     id: "PU-009",
-    date: "Thursday, April 9",
+    pickupId: "#F72C8E19",
+    date: "April 9, 2026 at 9:00am - 10:00am",
     dateISO: "2026-04-09",
-    timeWindow: "9:00am - 10:00am",
-    statusDetail: "9:00am - 10:00am",
+    statusDetail: "April 9, 2026 at 9:00am - 10:00am",
     status: "Scheduled",
     carriers: ["Veho", "DoorDash", "UniUni"],
     items: 7,
@@ -130,10 +130,10 @@ export const PICKUPS: Pickup[] = [
   },
   {
     id: "PU-010",
-    date: "Thursday, April 9",
+    pickupId: "#B88012CC",
+    date: "April 9, 2026 at 1:00pm - 2:00pm",
     dateISO: "2026-04-09",
-    timeWindow: "1:00pm - 2:00pm",
-    statusDetail: "Dropped off at 1:48pm",
+    statusDetail: "Dropped off today at 1:48pm",
     status: "Dropped Off",
     carriers: ["UPS", "FedEx", "USPS", "OnTrac"],
     items: 4,
