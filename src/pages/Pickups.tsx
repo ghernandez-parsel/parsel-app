@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Search,
   ChevronDown,
@@ -130,10 +131,15 @@ function ProgressBar({ status }: { status: PickupStatus }) {
 // ─── Pickup Card ─────────────────────────────────────────────────────────────
 
 function PickupCard({ pickup }: { pickup: typeof PICKUPS[0] }) {
+  const navigate = useNavigate();
   const canContactDriver =
     pickup.status === "Driver Assigned" ||
     pickup.status === "En Route" ||
     pickup.status === "Picked Up";
+
+  function goToDetail() {
+    navigate(`/pickups/${pickup.id}`);
+  }
 
   return (
     <div className="bg-white border border-[#e5e5de] rounded-xl p-5 flex flex-col gap-4 shadow-sm">
@@ -144,7 +150,12 @@ function PickupCard({ pickup }: { pickup: typeof PICKUPS[0] }) {
             <Truck size={18} className="text-[#0a0a0a]/50" />
           </div>
           <div>
-            <p className="text-sm font-semibold text-[#0a0a0a]">{pickup.pickupId}</p>
+            <button
+              onClick={goToDetail}
+              className="text-sm font-semibold text-[#0a0a0a] hover:text-[#E8480C] transition-colors text-left"
+            >
+              {pickup.pickupId}
+            </button>
             <p className="text-xs text-[#0a0a0a]/60">{pickup.statusDetail}</p>
           </div>
         </div>
@@ -172,7 +183,10 @@ function PickupCard({ pickup }: { pickup: typeof PICKUPS[0] }) {
 
       {/* Actions */}
       <div className="flex items-center gap-2 flex-wrap">
-        <button className="h-8 px-3 rounded-lg border border-[#e5e5de] bg-white text-xs font-medium text-[#0a0a0a] hover:bg-[#f3f3ed] transition-colors">
+        <button
+          onClick={goToDetail}
+          className="h-8 px-3 rounded-lg border border-[#e5e5de] bg-white text-xs font-medium text-[#0a0a0a] hover:bg-[#f3f3ed] transition-colors"
+        >
           Pickup Details
         </button>
         <button className="h-8 px-3 rounded-lg border border-[#e5e5de] bg-white text-xs font-medium text-[#0a0a0a] hover:bg-[#f3f3ed] transition-colors">
